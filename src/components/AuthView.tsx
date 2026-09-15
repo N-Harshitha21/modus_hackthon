@@ -425,32 +425,29 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
               </button>
             </div>
 
-            {/* Playable Video Player Container */}
+            {/* Universal Video Player Container */}
             <div style={{
               position: 'relative',
               paddingTop: '56.25%',
               background: '#030D18',
               borderRadius: '12px',
               overflow: 'hidden',
-              border: '1px solid rgba(56, 189, 248, 0.3)'
+              border: '1px solid rgba(56, 189, 248, 0.4)'
             }}>
-              <video
-                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-                controls
-                autoPlay
-                playsInline
-                poster="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+              <iframe
+                src="https://www.youtube.com/embed/aircAruvnKk?autoplay=1&rel=0&modestbranding=1"
+                title="Modus AI Platform Walkthrough"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
                 style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover'
+                  border: 'none'
                 }}
-              >
-                Your browser does not support playing HTML5 video.
-              </video>
+              />
             </div>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
