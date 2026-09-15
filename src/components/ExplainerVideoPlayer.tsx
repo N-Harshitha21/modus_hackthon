@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, RotateCcw, Volume2, VolumeX, ShieldCheck, Brain, FileText, CheckCircle2, Sparkles } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, VolumeX, ShieldCheck, Brain, FileText, CheckCircle2, Sparkles, CreditCard, Compass } from 'lucide-react';
 
 interface ExplainerVideoPlayerProps {
   onComplete?: () => void;
@@ -7,46 +7,50 @@ interface ExplainerVideoPlayerProps {
 
 export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onComplete }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [progress, setProgress] = useState<number>(0); // 0 to 100
+  const [progress, setProgress] = useState<number>(0);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
   const slides = [
     {
-      title: '1. Candidate Profile Setup & Evidence Parsing',
-      subtitle: 'CV Parsing & Verified Portfolio Extraction',
-      description: 'Upload your resume or input your experience. Modus AI automatically extracts exact LinkedIn, GitHub, and Portfolio URLs while maintaining clean initial state.',
+      title: '1. Onboarding & Resume Link Extraction',
+      subtitle: 'Modus AI Platform • Candidate Profile Setup',
+      description: 'Candidates register with privacy consent. Uploading a CV automatically parses exact LinkedIn, GitHub, and Portfolio URLs without fake slug fallbacks.',
       icon: <FileText size={40} color="#38BDF8" />,
       color: '#38BDF8',
       bgGradient: 'linear-gradient(135deg, #0A2540 0%, #031222 100%)',
-      details: ['PDF & TXT Parsing', 'Exact URL Extraction', 'No Placeholder Fallbacks']
+      details: ['Clean Initial Input State', 'Exact URL Parsing', 'Live ↗ Link Previews'],
+      narration: "Welcome to Modus AI! Candidates complete their profile with verified social links and parsed CV evidence."
     },
     {
       title: '2. Senior Assessor Gatekeeper Review',
-      subtitle: 'Strict Quality Control & Assessment Authorization',
-      description: 'Senior Assessors audit candidate evidence, current experience, and target roles before unlocking assessment access to prevent unverified submissions.',
+      subtitle: 'Assessor Portal • Credential Audit',
+      description: 'Senior Assessors audit profile credentials in Stage 3 and approve or request changes before granting access to assessment questions.',
       icon: <ShieldCheck size={40} color="#FBBF24" />,
       color: '#FBBF24',
       bgGradient: 'linear-gradient(135deg, #1E1B4B 0%, #090D16 100%)',
-      details: ['Credential Audit', 'Assessor Approval Gate', 'Assessment Ticket Issuance']
+      details: ['Assessor Admin Portal', 'Strict Approval Gatekeeper', 'Audit Trail Notes'],
+      narration: "Assessment access remains strictly locked until a Senior Assessor approves candidate credentials."
     },
     {
-      title: '3. Adaptive OpenAI Assessment Engine',
-      subtitle: 'Dynamic Competency Probing (gpt-4o-mini)',
-      description: 'Take a 5-question technical assessment that dynamically adapts to your exact resume skills, target role, and real-time response quality.',
+      title: '3. Track Selection, Pass Checkout & OpenAI Assessment',
+      subtitle: 'Adaptive AI Engine • gpt-4o-mini',
+      description: 'Choose from 4 specialized tracks (AI Engineer, Full-Stack, Data Science, Product), complete pass checkout ($0/$250), and answer 5 dynamic OpenAI questions.',
       icon: <Brain size={40} color="#A855F7" />,
       color: '#A855F7',
       bgGradient: 'linear-gradient(135deg, #2E1065 0%, #08031A 100%)',
-      details: ['OpenAI Integration', 'Hybrid Evidence Scoring', 'Real-Time Rationale']
+      details: ['4 Track Options', '$0 / $250 Ticket Checkout', 'OpenAI gpt-4o-mini Scoring'],
+      narration: "Questions adapt dynamically to parsed resume skills and real-time response quality using OpenAI."
     },
     {
-      title: '4. Executive Report & 6-Month Roadmap',
-      subtitle: 'Capability Metrics (CCI / CPI / CRI) & Action Plan',
-      description: 'Receive your Capability Index, strengths, skill gaps, target role benchmark comparison, and 6-month personalized development roadmap.',
+      title: '4. Executive Dashboard, $250 Report & 6-Month Roadmap',
+      subtitle: 'Capability Metrics • CCI / CPI / CRI',
+      description: 'View Capability Index scores, demonstrated strengths, skill gaps, role benchmark match, 7-page PDF report export, and a 6-month development plan.',
       icon: <Sparkles size={40} color="#34D399" />,
       color: '#34D399',
       bgGradient: 'linear-gradient(135deg, #064E3B 0%, #021B14 100%)',
-      details: ['3-Page Detailed PDF', 'Skill Gap Identification', 'Career Pathway Benchmark']
+      details: ['Summary of Findings', '$250 PDF Report Gate', '6-Month Career Roadmap'],
+      narration: "Receive comprehensive Capability Index metrics and a personalized 6-month development roadmap."
     }
   ];
 
@@ -68,7 +72,7 @@ export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onCo
           }
           return nextProgress;
         });
-      }, 200); // 20s total video duration
+      }, 180); // ~18s video length
     }
     return () => clearInterval(interval);
   }, [isPlaying, activeSlide, onComplete]);
@@ -95,7 +99,7 @@ export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onCo
       {/* Video Screen Area */}
       <div style={{
         position: 'relative',
-        minHeight: '340px',
+        minHeight: '350px',
         background: currentSlide.bgGradient,
         padding: '2.5rem',
         display: 'flex',
@@ -108,12 +112,12 @@ export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onCo
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,0,0,0.4)', padding: '0.35rem 0.85rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isPlaying ? '#34D399' : '#EF4444' }}></span>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#FFF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {isPlaying ? 'PLAYING DEMO VIDEO' : 'PAUSED'}
+              {isPlaying ? 'PLAYING PLATFORM EXPLAINER' : 'PAUSED'}
             </span>
           </div>
 
           <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600 }}>
-            Modus AI Explainer • {Math.floor((progress / 100) * 105)}s / 105s
+            Modus AI Walkthrough • Step {activeSlide + 1} of 4
           </div>
         </div>
 
@@ -168,8 +172,23 @@ export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onCo
           </div>
         </div>
 
+        {/* Narration Overlay Subtitle */}
+        <div style={{
+          background: 'rgba(0, 0, 0, 0.65)',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '0.6rem 1rem',
+          borderRadius: '8px',
+          textAlign: 'center',
+          fontSize: '0.85rem',
+          color: '#E2E8F0',
+          fontStyle: 'italic'
+        }}>
+          💬 🎙️ Narration: "{currentSlide.narration}"
+        </div>
+
         {/* Slide Indicator Dots */}
-        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginTop: '1rem' }}>
           {slides.map((_, idx) => (
             <button
               key={idx}
@@ -264,7 +283,7 @@ export const ExplainerVideoPlayer: React.FC<ExplainerVideoPlayerProps> = ({ onCo
               style={{ background: 'none', border: 'none', color: '#94A3B8', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.85rem' }}
             >
               {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} color="#38BDF8" />}
-              <span>{isMuted ? 'Muted' : 'Audio On'}</span>
+              <span>{isMuted ? 'Muted' : 'Audio Subtitles On'}</span>
             </button>
           </div>
         </div>
