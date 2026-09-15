@@ -425,56 +425,32 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
               </button>
             </div>
 
-            {/* Video Player Container */}
+            {/* Playable Video Player Container */}
             <div style={{
               position: 'relative',
               paddingTop: '56.25%',
               background: '#030D18',
               borderRadius: '12px',
               overflow: 'hidden',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              border: '1px solid rgba(56, 189, 248, 0.3)'
             }}>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #0A2540 0%, #030D18 100%)',
-                color: '#FFF',
-                padding: '2rem',
-                textAlign: 'center'
-              }}>
-                <div style={{
-                  width: '70px',
-                  height: '70px',
-                  borderRadius: '50%',
-                  background: 'rgba(56, 189, 248, 0.2)',
-                  border: '2px solid #38BDF8',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1rem'
-                }}>
-                  <span style={{ fontSize: '2rem', color: '#38BDF8', marginLeft: '4px' }}>▶</span>
-                </div>
-                <h4 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem', color: '#38BDF8' }}>
-                  Modus AI Platform Walkthrough
-                </h4>
-                <p style={{ fontSize: '0.95rem', color: '#94A3B8', maxWidth: '520px', lineHeight: 1.5 }}>
-                  Learn how candidate profiles are parsed, verified by Senior Assessors, evaluated using adaptive OpenAI models, and compiled into 3-Page Executive Capability Reports.
-                </p>
-
-                <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.85rem', color: '#CBD5E1' }}>
-                  <span>✓ Evidence Verification</span>
-                  <span>✓ Senior Gatekeeper</span>
-                  <span>✓ 6-Month Roadmap</span>
-                </div>
-              </div>
+              <video
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                controls
+                autoPlay
+                playsInline
+                poster="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              >
+                Your browser does not support playing HTML5 video.
+              </video>
             </div>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
