@@ -6,15 +6,18 @@ interface DetailedReportViewProps {
   profile: CandidateProfile;
   metrics: AssessmentMetrics;
   onBack: () => void;
+  onUnlockReport?: () => void;
 }
 
 export const DetailedReportView: React.FC<DetailedReportViewProps> = ({
   profile,
   metrics,
-  onBack
+  onBack,
+  onUnlockReport
 }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = 7;
+  const isUnlocked = profile.hasPaidDetailedReport ?? true;
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1000px', margin: '2rem auto', padding: '0 1rem' }}>
@@ -53,6 +56,48 @@ export const DetailedReportView: React.FC<DetailedReportViewProps> = ({
           <span>Print / Export PDF</span>
         </button>
       </div>
+
+      {/* Paywall Banner if Report is Locked */}
+      {!isUnlocked && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          border: '1px solid #FBBF24',
+          borderRadius: '12px',
+          padding: '1.5rem 2rem',
+          marginBottom: '1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1.5rem',
+          flexWrap: 'wrap'
+        }}>
+          <div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#FBBF24', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              🔒 Optional $250 Detailed Technical Report Access
+            </div>
+            <p style={{ color: '#CBD5E1', fontSize: '0.9rem', marginTop: '0.25rem', margin: 0 }}>
+              Upgrade to unlock the complete 7-page PDF export, benchmark matrix, evidence breakdown, and 6-month capability roadmap.
+            </p>
+          </div>
+
+          <button
+            onClick={onUnlockReport}
+            style={{
+              background: '#FBBF24',
+              color: '#0F172A',
+              border: 'none',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '8px',
+              fontWeight: 800,
+              fontSize: '0.9rem',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Unlock Report ($250 Pass) →
+          </button>
+        </div>
+      )}
 
       {/* REPORT CONTAINER */}
       <div className="glass-card" style={{ padding: '3rem', minHeight: '650px', background: '#091A29', border: '1px solid rgba(56, 189, 248, 0.25)' }}>

@@ -7,9 +7,11 @@ interface AuthViewProps {
 
 export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
   const [activeModal, setActiveModal] = useState<'signin' | 'signup' | null>(null);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [email, setEmail] = useState('candidate.demo@modus.ai');
   const [password, setPassword] = useState('••••••••••••');
   const [fullName, setFullName] = useState('Harshitha N');
+  const [consentGiven, setConsentGiven] = useState(true);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,6 +108,49 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
         }}>
           Assess your capabilities, identify your strengths and skill gaps, and receive a personalised development pathway.
         </p>
+
+        {/* Hero CTA & Explainer Video Button */}
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setActiveModal('signup')}
+            style={{
+              background: '#38BDF8',
+              color: '#031222',
+              padding: '0.85rem 1.75rem',
+              borderRadius: '8px',
+              fontWeight: 700,
+              fontSize: '1rem',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+          >
+            <span>Start Candidate Assessment</span>
+            <ArrowRight size={18} />
+          </button>
+
+          <button
+            onClick={() => setIsVideoOpen(true)}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              color: '#F8FAFC',
+              padding: '0.85rem 1.5rem',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+          >
+            <span style={{ fontSize: '1.1rem' }}>▶</span>
+            <span>Watch Explainer Video</span>
+          </button>
+        </div>
       </section>
 
       {/* 3. HOW IT WORKS SECTION */}
@@ -287,6 +332,21 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
                 />
               </div>
 
+              {/* Registration & Evaluation Consent Checkbox */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', margin: '1rem 0 0.5rem 0', textAlign: 'left' }}>
+                <input
+                  type="checkbox"
+                  id="consent"
+                  checked={consentGiven}
+                  onChange={(e) => setConsentGiven(e.target.checked)}
+                  required
+                  style={{ marginTop: '0.2rem', accentColor: '#38BDF8', cursor: 'pointer' }}
+                />
+                <label htmlFor="consent" style={{ fontSize: '0.8rem', color: '#94A3B8', lineHeight: 1.4, cursor: 'pointer' }}>
+                  I consent to automated AI candidate evaluation, resume parsing, and storage of my assessment results under privacy terms.
+                </label>
+              </div>
+
               <button
                 type="submit"
                 style={{
@@ -325,6 +385,116 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
                 style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(16,185,129,0.3)', color: '#34D399', padding: '0.5rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
               >
                 <ShieldCheck size={13} color="#34D399" /> Demo Assessor
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* EXPLAINER VIDEO MODAL */}
+      {isVideoOpen && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(2, 11, 20, 0.9)',
+          backdropFilter: 'blur(12px)',
+          zIndex: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1.5rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '800px',
+            background: '#081B30',
+            border: '1px solid rgba(56, 189, 248, 0.4)',
+            borderRadius: '16px',
+            padding: '2rem',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-heading)', color: '#FFF', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Brain color="#38BDF8" size={24} /> Modus AI Evaluation Process Explainer
+              </h3>
+              <button
+                onClick={() => setIsVideoOpen(false)}
+                style={{ background: 'none', border: 'none', color: '#94A3B8', fontSize: '1.5rem', cursor: 'pointer' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Video Player Container */}
+            <div style={{
+              position: 'relative',
+              paddingTop: '56.25%',
+              background: '#030D18',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, #0A2540 0%, #030D18 100%)',
+                color: '#FFF',
+                padding: '2rem',
+                textAlign: 'center'
+              }}>
+                <div style={{
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '50%',
+                  background: 'rgba(56, 189, 248, 0.2)',
+                  border: '2px solid #38BDF8',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '1rem'
+                }}>
+                  <span style={{ fontSize: '2rem', color: '#38BDF8', marginLeft: '4px' }}>▶</span>
+                </div>
+                <h4 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.5rem', color: '#38BDF8' }}>
+                  Modus AI Platform Walkthrough
+                </h4>
+                <p style={{ fontSize: '0.95rem', color: '#94A3B8', maxWidth: '520px', lineHeight: 1.5 }}>
+                  Learn how candidate profiles are parsed, verified by Senior Assessors, evaluated using adaptive OpenAI models, and compiled into 3-Page Executive Capability Reports.
+                </p>
+
+                <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.85rem', color: '#CBD5E1' }}>
+                  <span>✓ Evidence Verification</span>
+                  <span>✓ Senior Gatekeeper</span>
+                  <span>✓ 6-Month Roadmap</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => {
+                  setIsVideoOpen(false);
+                  setActiveModal('signup');
+                }}
+                style={{
+                  background: '#38BDF8',
+                  color: '#031222',
+                  border: 'none',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '8px',
+                  fontWeight: 700,
+                  fontSize: '0.95rem',
+                  cursor: 'pointer'
+                }}
+              >
+                Proceed to Registration →
               </button>
             </div>
           </div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { AssessmentStage, CandidateProfile, CandidateResponse } from './types';
+import { AssessmentStage, CandidateProfile, CandidateResponse, AssessmentTrack } from './types';
 import { Navbar } from './components/Navbar';
 import { AuthView } from './components/AuthView';
 import { ProfileView } from './components/ProfileView';
 import { AssessorPortal } from './components/AssessorPortal';
 import { GatekeeperView } from './components/GatekeeperView';
+import { ChooseAssessmentView } from './components/ChooseAssessmentView';
+import { PaymentView } from './components/PaymentView';
 import { AdaptiveAssessmentView } from './components/AdaptiveAssessmentView';
 import { ResultsView } from './components/ResultsView';
 
@@ -25,7 +27,10 @@ const EMPTY_PROFILE: CandidateProfile = {
   skills: [],
   areasOfInterest: [],
   approvalStatus: 'pending',
-  submittedAt: new Date().toISOString()
+  submittedAt: new Date().toISOString(),
+  consentGiven: true,
+  selectedTrack: 'ai_engineer',
+  hasPaidDetailedReport: false
 };
 
 export function App() {
@@ -103,13 +108,31 @@ export function App() {
     }));
   };
 
+  // Select Assessment Track
+  const handleSelectTrack = (track: AssessmentTrack) => {
+    setCandidateProfile(prev => ({
+      ...prev,
+      selectedTrack: track
+    }));
+    setCurrentStage(5); // Proceed to Payment Pass stage
+  };
+
+  // Payment Completion
+  const handlePaymentComplete = (paidDetailedReport: boolean) => {
+    setCandidateProfile(prev => ({
+      ...prev,
+      hasPaidDetailedReport: paidDetailedReport
+    }));
+    setCurrentStage(6); // Start Adaptive Assessment
+  };
+
   // Assessment Handlers
   const handleCompleteAssessment = (history: CandidateResponse[]) => {
     setResponseHistory(history);
     setCurrentStage(7); // AI Evaluation
     setTimeout(() => {
       setCurrentStage(8); // Results Dashboard & Report
-    }, 1500);
+    }, 1200);
   };
 
   return (
@@ -149,17 +172,31 @@ export function App() {
         )}
 
         {currentStage === 4 && (
-          <GatekeeperView
+          candidateProfile.approvalStatus === 'approved' ? (
+            <ChooseAssessmentView
+              profile={candidateProfile}
+              onSelectTrack={handleSelectTrack}
+            />
+          ) : (
+            <GatekeeperView
+              profile={candidateProfile}
+              onStartAssessment={() => setCurrentStage(4)}
+              onSwitchToAssessor={() => {
+                setIsAssessorMode(true);
+                setCurrentStage(3);
+              }}
+            />
+          )
+        )}
+
+        {currentStage === 5 && (
+          <PaymentView
             profile={candidateProfile}
-            onStartAssessment={() => setCurrentStage(5)}
-            onSwitchToAssessor={() => {
-              setIsAssessorMode(true);
-              setCurrentStage(3);
-            }}
+            onPaymentComplete={handlePaymentComplete}
           />
         )}
 
-        {(currentStage === 5 || currentStage === 6) && (
+        {currentStage === 6 && (
           <AdaptiveAssessmentView
             profile={candidateProfile}
             onCompleteAssessment={handleCompleteAssessment}

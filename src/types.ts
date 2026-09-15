@@ -8,6 +8,12 @@ export type AssessmentStage =
   | 7 // AI Scoring Engine
   | 8 // Results Dashboard & 7-Page Report
 
+export type AssessmentTrack = 
+  | 'ai_engineer'
+  | 'fullstack'
+  | 'data_science'
+  | 'product_leadership';
+
 export interface CandidateProfile {
   id: string;
   fullName: string;
@@ -27,6 +33,9 @@ export interface CandidateProfile {
   approvalStatus: 'pending' | 'approved' | 'rejected';
   assessorNotes?: string;
   submittedAt: string;
+  consentGiven?: boolean;
+  selectedTrack?: AssessmentTrack;
+  hasPaidDetailedReport?: boolean;
 }
 
 export type CompetencyName = 
