@@ -1,32 +1,83 @@
-# React + TypeScript + Vite
+# 🚀 Modus AI — Dynamic Candidate Assessment Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **Live Interactive Output**: [https://n-harshitha21.github.io/modus_hackthon/](https://n-harshitha21.github.io/modus_hackthon/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Overview
+**Modus AI** is an advanced, evidence-based candidate assessment and skill mapping platform designed to evaluate candidate capability (CCI), potential (CPI), and job readiness (CRI).
 
-## React Compiler
+Instead of relying solely on self-reported resume claims, Modus AI dynamically parses uploaded candidate resumes, verifies portfolio and repository links, and locked assessments until approved by a Senior Assessor.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🔗 Live Application Output
+Visitors can instantly view and interact with the live application:
+👉 **[Click Here to Launch Live App](https://n-harshitha21.github.io/modus_hackthon/)**
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## ✨ Key Features
+
+1. **Clean Profile Onboarding**:
+   - Initial profile fields start completely blank until candidate inputs details or uploads a resume.
+   - Resume parser extracts candidate name, education, experience, and exact portfolio/GitHub/LinkedIn links.
+
+2. **Strict Senior Assessor Gatekeeping**:
+   - Stage 5 adaptive assessment questions remain locked until approved by the Senior Assessor in Stage 3.
+   - Prevents unverified submissions from accessing testing workflows.
+
+3. **OpenAI Dynamic AI Assessment**:
+   - Dynamic 5-question technical assessment powered by OpenAI (`gpt-4o-mini`).
+   - If resume is uploaded, questions adapt dynamically to the candidate's exact resume skills and background.
+
+4. **3-Page Detailed Technical Report & Executive Summary**:
+   - Detailed visual breakdown of Capability Index (CCI), Potential Index (CPI), and Readiness Index (CRI).
+   - Generates strengths, skill gaps, verified evidence links, and a 6-month personalized development plan.
+
+5. **LocalStorage Data Persistence**:
+   - Profile state (`modus_candidate_profile`) and response state (`modus_assessment_responses`) automatically save across browser reloads.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend**: React 18, TypeScript, Vite
+* **Styling**: Modern CSS with HSL dark mode, Glassmorphism, Responsive Grid
+* **Icons**: Lucide React
+* **AI Evaluation**: OpenAI API (`gpt-4o-mini`) with fallback local scoring rules
+* **Deployment**: GitHub Pages (`gh-pages`)
+
+---
+
+## 🚀 Local Setup & Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/N-Harshitha21/modus_hackthon.git
+cd modus_hackthon
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 📜 Available Scripts
+
+* `npm run dev`: Runs the local development server with HMR.
+* `npm run build`: Compiles TypeScript and builds production assets into `dist/`.
+* `npm run deploy`: Builds and deploys the production bundle directly to GitHub Pages.
+
+---
+
+## 📄 License
+Created for Hackathon / Project Demonstration. All rights reserved.
