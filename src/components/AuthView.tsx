@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LogIn, UserPlus, ArrowRight, UserCheck, ShieldCheck, Brain, BarChart2 } from 'lucide-react';
+import { ExplainerVideoPlayer } from './ExplainerVideoPlayer';
 
 interface AuthViewProps {
   onLoginSuccess: (role: 'candidate' | 'assessor') => void;
@@ -425,30 +426,12 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLoginSuccess }) => {
               </button>
             </div>
 
-            {/* Universal Video Player Container */}
-            <div style={{
-              position: 'relative',
-              paddingTop: '56.25%',
-              background: '#030D18',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              border: '1px solid rgba(56, 189, 248, 0.4)'
-            }}>
-              <iframe
-                src="https://www.youtube.com/embed/aircAruvnKk?autoplay=1&rel=0&modestbranding=1"
-                title="Modus AI Platform Walkthrough"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  border: 'none'
-                }}
-              />
-            </div>
+            {/* Interactive Explainer Video Player */}
+            <ExplainerVideoPlayer
+              onComplete={() => {
+                // Video completed
+              }}
+            />
 
             <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
               <button
